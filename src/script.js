@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 // import * as dat from 'lil-gui'
 import vertexShader from "./shaders/vertex.glsl"
 import fragmentShader from "./shaders/fragment.glsl"
+import { ARButton } from 'three/examples/jsm/webxr/ARButton.js'
 
 /**
  * Base
@@ -116,7 +117,9 @@ const generateGalaxy = () => {
     scene.add(points)
 }
 
-
+//  AR button
+const button = ARButton.createButton(renderer)
+document.body.appendChild(button)
 
 // gui.add(parameters, 'count').min(100).max(1000000).step(100).onFinishChange(generateGalaxy)
 // gui.add(parameters, 'radius').min(0.01).max(20).step(0.01).onFinishChange(generateGalaxy)
@@ -144,6 +147,7 @@ window.addEventListener('resize', () => {
     camera.updateProjectionMatrix()
 
     // Update renderer
+    renderer.xr.enabled = true
     renderer.setSize(sizes.width, sizes.height)
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
